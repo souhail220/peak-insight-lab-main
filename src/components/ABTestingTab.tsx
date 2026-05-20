@@ -20,7 +20,7 @@ export function ABTestingTab({
   const { dataA, dataB, setData } = useABTestStore();
 
   useEffect(() => {
-    if (!dataA || !dataB) {
+    if (!dataA || !dataB || dataA.userCount !== 490 || dataB.userCount !== 490) {
       const { dataA: demoA, dataB: demoB } = generateDemoABTestData();
       setData(demoA, demoB);
     }

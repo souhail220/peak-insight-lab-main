@@ -6,14 +6,14 @@ const FEATURES = [
   "AI Safety Watch",
   "Offline AI Emergency Assistant",
   "Mesh SOS Network",
-  "AI Route Generator + AR",
+  "AI Route Generator with AR Navigation",
   "RadioMode Walkie-Talkie",
   "Smart Gear Checklist",
   "AI Hiking Companion",
   "Enhanced Route Sharing",
-  "GhostTrail Footprint",
+  "GhostTrail Footprint System",
   "WildlifeID Lens",
-  "StarPath Navigator",
+  "StarPath Night Navigator",
   "ThermalRisk Scanner"
 ];
 
@@ -21,63 +21,77 @@ const FEATURES = [
 export function generateDemoInterfaceData(variant: "A" | "B"): InterfaceData {
   const isVariantB = variant === "B";
 
+  const userCount = 490;
+  const featureRates: Record<string, { A: number; B: number }> = {
+    "AI Safety Watch": { A: 0.71, B: 0.78 },
+    "Offline AI Emergency Assistant": { A: 0.64, B: 0.70 },
+    "Mesh SOS Network": { A: 0.56, B: 0.62 },
+    "AI Route Generator with AR Navigation": { A: 0.74, B: 0.82 },
+    "RadioMode Walkie-Talkie": { A: 0.58, B: 0.64 },
+    "Smart Gear Checklist": { A: 0.76, B: 0.83 },
+    "AI Hiking Companion": { A: 0.69, B: 0.77 },
+    "Enhanced Route Sharing": { A: 0.52, B: 0.58 },
+    "GhostTrail Footprint System": { A: 0.55, B: 0.61 },
+    "WildlifeID Lens": { A: 0.61, B: 0.68 },
+    "StarPath Night Navigator": { A: 0.43, B: 0.48 },
+    "ThermalRisk Scanner": { A: 0.49, B: 0.55 },
+  };
+
   // Generate feature interaction data for each user
-  const rawData = Array.from({ length: 150 }, (_, i) => {
+  const rawData = Array.from({ length: userCount }, (_, i) => {
     const userId = `USER_${variant}_${String(i + 1).padStart(3, "0")}`;
     const baseObj: Record<string, any> = { "User ID": userId };
     
     // For each feature, track adoption and interactions
     FEATURES.forEach(feature => {
-      const adoptionRate = isVariantB ? Math.random() > 0.25 : Math.random() > 0.4;
-      baseObj[`${feature} (Used)`] = adoptionRate ? "Yes" : "No";
-      baseObj[`${feature} (Interactions)`] = adoptionRate ? Math.floor(Math.random() * 50 + (isVariantB ? 15 : 8)) : 0;
-      baseObj[`${feature} (Avg Time)`] = adoptionRate ? Math.floor(Math.random() * 300 + (isVariantB ? 60 : 30)) : 0;
+      const rate = featureRates[feature][variant];
+      const adopted = i < Math.round(userCount * rate);
+      baseObj[`${feature} (Used)`] = adopted ? "Yes" : "No";
+      baseObj[`${feature} (Interactions)`] = adopted ? 2 + ((i * 7) % 9) + (isVariantB ? 1 : 0) : 0;
+      baseObj[`${feature} (Avg Time)`] = adopted ? 70 + ((i * 11) % 180) + (isVariantB ? 18 : 0) : 0;
     });
 
     // Additional engagement metrics
-    baseObj["Screens Visited"] = Math.floor(Math.random() * 15 + (isVariantB ? 8 : 5));
-    baseObj["Session Duration (sec)"] = Math.floor(Math.random() * 1200 + (isVariantB ? 300 : 150));
-    baseObj["Feature Discovery"] = Math.floor(Math.random() * 12 + (isVariantB ? 6 : 3));
-    baseObj["Emergency Used"] = Math.random() > 0.95 ? "Yes" : "No";
+    baseObj["Screens Visited"] = 4 + (i % 5) + (isVariantB ? 1 : 0);
+    baseObj["Session Duration (sec)"] = 230 + ((i * 13) % 220) + (isVariantB ? 28 : 0);
+    baseObj["Feature Discovery"] = 5 + (i % 5) + (isVariantB ? 1 : 0);
+    baseObj["Emergency Used"] = i % 41 === 0 ? "Yes" : "No";
     
     return baseObj;
   });
 
   const kpis = [
-    { kpi: "AI Safety Watch Adoption", rate: isVariantB ? 0.68 : 0.35, raw: isVariantB ? 102 : 52, target: "65%", vsA: "+33pp" },
-    { kpi: "Offline AI Emergency Adoption", rate: isVariantB ? 0.61 : 0.28, raw: isVariantB ? 91 : 42, target: "60%", vsA: "+33pp" },
-    { kpi: "Mesh SOS Network Usage", rate: isVariantB ? 0.52 : 0.22, raw: isVariantB ? 78 : 33, target: "50%", vsA: "+30pp" },
-    { kpi: "AI Route Generator + AR Adoption", rate: isVariantB ? 0.75 : 0.45, raw: isVariantB ? 112 : 67, target: "70%", vsA: "+30pp" },
-    { kpi: "RadioMode Walkie-Talkie Usage", rate: isVariantB ? 0.58 : 0.32, raw: isVariantB ? 87 : 48, target: "55%", vsA: "+26pp" },
-    { kpi: "Smart Gear Checklist Adoption", rate: isVariantB ? 0.72 : 0.48, raw: isVariantB ? 108 : 72, target: "70%", vsA: "+24pp" },
-    { kpi: "AI Hiking Companion Engagement", rate: isVariantB ? 0.81 : 0.52, raw: isVariantB ? 121 : 78, target: "75%", vsA: "+29pp" },
-    { kpi: "Route Sharing (Community)", rate: isVariantB ? 0.46 : 0.24, raw: isVariantB ? 69 : 36, target: "45%", vsA: "+22pp" },
-    { kpi: "GhostTrail Footprint Usage", rate: isVariantB ? 0.54 : 0.28, raw: isVariantB ? 81 : 42, target: "50%", vsA: "+26pp" },
-    { kpi: "WildlifeID Lens Engagement", rate: isVariantB ? 0.63 : 0.38, raw: isVariantB ? 94 : 57, target: "60%", vsA: "+25pp" },
-    { kpi: "StarPath Navigator Adoption", rate: isVariantB ? 0.44 : 0.19, raw: isVariantB ? 66 : 28, target: "40%", vsA: "+25pp" },
-    { kpi: "ThermalRisk Scanner Awareness", rate: isVariantB ? 0.59 : 0.35, raw: isVariantB ? 88 : 52, target: "55%", vsA: "+24pp" },
-    { kpi: "Start Hike Button", rate: isVariantB ? 0.62 : 0.53, raw: isVariantB ? 93 : 80, target: null, vsA: null },
-    { kpi: "Trip Planning Success", rate: isVariantB ? 0.68 : 0.48, raw: isVariantB ? 102 : 72, target: "60%", vsA: "+20pp" },
-    { kpi: "Plan Trip CTA", rate: isVariantB ? 0.55 : 0.45, raw: isVariantB ? 82 : 68, target: null, vsA: null },
-    { kpi: "Reserve Now Conversion", rate: isVariantB ? 0.54 : 0.35, raw: isVariantB ? 81 : 52, target: "50%", vsA: "+19pp" },
-    { kpi: "Route Removal Rate", rate: isVariantB ? 0.08 : 0.12, raw: isVariantB ? 12 : 18, target: null, vsA: null },
-    { kpi: "Guide Profile Views", rate: isVariantB ? 0.68 : 0.58, raw: isVariantB ? 102 : 87, target: null, vsA: null },
+    ...FEATURES.map((feature) => {
+      const rate = featureRates[feature][variant];
+      const rateA = featureRates[feature].A;
+      return {
+        kpi: `${feature} Adoption`,
+        rate,
+        raw: Math.round(userCount * rate),
+        target: feature.includes("StarPath") || feature.includes("ThermalRisk") ? "50%" : "70%",
+        vsA: isVariantB ? `+${Math.round((rate - rateA) * 100)}pp` : null,
+      };
+    }),
+    { kpi: "Start Hike Activation", rate: isVariantB ? 0.79 : 0.72, raw: isVariantB ? 387 : 353, target: "75%", vsA: isVariantB ? "+7pp" : null },
+    { kpi: "Route Plan Completed", rate: isVariantB ? 0.77 : 0.70, raw: isVariantB ? 377 : 343, target: "72%", vsA: isVariantB ? "+7pp" : null },
+    { kpi: "Day 7 Retention", rate: isVariantB ? 0.58 : 0.52, raw: isVariantB ? 284 : 255, target: "55%", vsA: isVariantB ? "+6pp" : null },
+    { kpi: "Intentful Session Rate", rate: isVariantB ? 0.83 : 0.79, raw: isVariantB ? 407 : 387, target: "80%", vsA: isVariantB ? "+4pp" : null },
   ];
 
   const funnel = [
-    { step: "Discover", users: 150, dropoff: 0, completion: 100 },
-    { step: "View Details", users: isVariantB ? 138 : 120, dropoff: isVariantB ? 12 : 30, completion: isVariantB ? 92 : 80 },
-    { step: "Save Trail", users: isVariantB ? 108 : 72, dropoff: isVariantB ? 30 : 48, completion: isVariantB ? 72 : 48 },
-    { step: "Plan Trip", users: isVariantB ? 102 : 68, dropoff: isVariantB ? 6 : 4, completion: isVariantB ? 68 : 45 },
-    { step: "Reserve Spot", users: isVariantB ? 81 : 52, dropoff: isVariantB ? 21 : 16, completion: isVariantB ? 54 : 35 },
+    { step: "Open App", users: userCount, dropoff: 0, completion: 100 },
+    { step: "Start Hike", users: isVariantB ? 387 : 353, dropoff: isVariantB ? 103 : 137, completion: isVariantB ? 79 : 72 },
+    { step: "Generate Route", users: isVariantB ? 377 : 343, dropoff: isVariantB ? 10 : 10, completion: isVariantB ? 77 : 70 },
+    { step: "Enable Safety Watch", users: isVariantB ? 382 : 348, dropoff: isVariantB ? 5 : 5, completion: isVariantB ? 78 : 71 },
+    { step: "Activate Trail Feature", users: isVariantB ? 386 : 348, dropoff: isVariantB ? 4 : 0, completion: isVariantB ? 79 : 71 },
   ];
 
   return {
     fileName: `Interface${variant}_TestData.xlsx`,
-    title: `Trail Mate A/B Test — Interface ${variant} | 150 Users`,
+    title: `Trail Mate A/B Test — Interface ${variant} | ${userCount} Users`,
     testName: `TrailMate Interface ${variant}`,
     testPeriod: "May 1-31, 2026",
-    userCount: 150,
+    userCount,
     kpis,
     funnel,
     rawColumns: [
@@ -89,7 +103,7 @@ export function generateDemoInterfaceData(variant: "A" | "B"): InterfaceData {
       "Emergency Used"
     ],
     rawData,
-    heatmaps: generateHeatmapsForInterface(variant, isVariantB, 150),
+    heatmaps: generateHeatmapsForInterface(variant, isVariantB, userCount),
   };
 }
 

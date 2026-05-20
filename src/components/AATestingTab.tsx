@@ -31,6 +31,7 @@ import {
 type StudyRow = {
   id: string;
   group: "A1" | "A2";
+  users: number;
   name: string;
   age: number;
   city: string;
@@ -41,21 +42,21 @@ type StudyRow = {
   timeOnTask: number;
   usability: number;
   quitTime: number; // Seconds into the task when they quit or completed
-  quitPage: "Search" | "Filter" | "Route Detail" | "Checkout" | "Success";
-  lastAction: "Back click" | "Looping" | "Error" | "Conversion" | "UI Stalling";
+  quitPage: "Search" | "Filter" | "Route Detail" | "Safety Setup" | "Success";
+  lastAction: "Back click" | "Looping" | "Error" | "Feature Activation" | "UI Stalling";
 };
 
 const studyRows: StudyRow[] = [
-  { id: "P01", group: "A1", name: "Yasmine Trabelsi", age: 28, city: "Tunis", persona: "Cautious planner", hikeFrequency: "4x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 142, usability: 5, quitTime: 142, quitPage: "Success", lastAction: "Conversion" },
-  { id: "P02", group: "A1", name: "Karim Ayari", age: 35, city: "Sfax", persona: "Experienced organiser", hikeFrequency: "6x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 118, usability: 6, quitTime: 118, quitPage: "Success", lastAction: "Conversion" },
-  { id: "P03", group: "A1", name: "Rayen Meherzi", age: 23, city: "Gobaa", persona: "Impulsive adventurer", hikeFrequency: "3x/mo", phase: "Phase 2", firstTap: "Map", timeOnTask: 92, usability: 4, quitTime: 45, quitPage: "Route Detail", lastAction: "Back click" },
-  { id: "P04", group: "A1", name: "Lina B.", age: 31, city: "Tunis", persona: "Cautious planner", hikeFrequency: "2x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 160, usability: 5, quitTime: 160, quitPage: "Success", lastAction: "Conversion" },
-  { id: "P05", group: "A1", name: "Nabil H.", age: 40, city: "Bizerte", persona: "Experienced organiser", hikeFrequency: "5x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 109, usability: 6, quitTime: 109, quitPage: "Success", lastAction: "Conversion" },
-  { id: "P06", group: "A2", name: "Sarra M.", age: 26, city: "Nabeul", persona: "Cautious planner", hikeFrequency: "2x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 155, usability: 5, quitTime: 70, quitPage: "Filter", lastAction: "UI Stalling" },
-  { id: "P07", group: "A2", name: "Amir K.", age: 33, city: "Sfax", persona: "Experienced organiser", hikeFrequency: "5x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 124, usability: 6, quitTime: 124, quitPage: "Success", lastAction: "Conversion" },
-  { id: "P08", group: "A2", name: "Tarek Z.", age: 22, city: "Sousse", persona: "Impulsive adventurer", hikeFrequency: "4x/mo", phase: "Phase 3", firstTap: "Routes", timeOnTask: 88, usability: 3, quitTime: 30, quitPage: "Search", lastAction: "Error" },
-  { id: "P09", group: "A2", name: "Mariem F.", age: 29, city: "Tunis", persona: "Cautious planner", hikeFrequency: "3x/mo", phase: "Phase 1", firstTap: "Map", timeOnTask: 171, usability: 5, quitTime: 171, quitPage: "Success", lastAction: "Conversion" },
-  { id: "P10", group: "A2", name: "Bilel R.", age: 38, city: "Monastir", persona: "Experienced organiser", hikeFrequency: "6x/mo", phase: "Phase 2", firstTap: "Alerts", timeOnTask: 112, usability: 6, quitTime: 112, quitPage: "Success", lastAction: "Conversion" },
+  { id: "P01", group: "A1", users: 98, name: "Yasmine Trabelsi", age: 28, city: "Tunis", persona: "Cautious planner", hikeFrequency: "4x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 142, usability: 5, quitTime: 142, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P02", group: "A1", users: 98, name: "Karim Ayari", age: 35, city: "Sfax", persona: "Experienced organiser", hikeFrequency: "6x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 121, usability: 6, quitTime: 121, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P03", group: "A1", users: 98, name: "Rayen Meherzi", age: 23, city: "Gobaa", persona: "Impulsive adventurer", hikeFrequency: "3x/mo", phase: "Phase 2", firstTap: "Map", timeOnTask: 96, usability: 4, quitTime: 48, quitPage: "Route Detail", lastAction: "Back click" },
+  { id: "P04", group: "A1", users: 98, name: "Lina B.", age: 31, city: "Tunis", persona: "Cautious planner", hikeFrequency: "2x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 158, usability: 5, quitTime: 158, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P05", group: "A1", users: 98, name: "Nabil H.", age: 40, city: "Bizerte", persona: "Experienced organiser", hikeFrequency: "5x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 112, usability: 6, quitTime: 112, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P06", group: "A2", users: 98, name: "Sarra M.", age: 26, city: "Nabeul", persona: "Cautious planner", hikeFrequency: "2x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 146, usability: 5, quitTime: 75, quitPage: "Filter", lastAction: "UI Stalling" },
+  { id: "P07", group: "A2", users: 98, name: "Amir K.", age: 33, city: "Sfax", persona: "Experienced organiser", hikeFrequency: "5x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 123, usability: 6, quitTime: 123, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P08", group: "A2", users: 98, name: "Tarek Z.", age: 22, city: "Sousse", persona: "Impulsive adventurer", hikeFrequency: "4x/mo", phase: "Phase 3", firstTap: "Routes", timeOnTask: 94, usability: 4, quitTime: 44, quitPage: "Search", lastAction: "Error" },
+  { id: "P09", group: "A2", users: 98, name: "Mariem F.", age: 29, city: "Tunis", persona: "Cautious planner", hikeFrequency: "3x/mo", phase: "Phase 1", firstTap: "Map", timeOnTask: 162, usability: 5, quitTime: 162, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P10", group: "A2", users: 98, name: "Bilel R.", age: 38, city: "Monastir", persona: "Experienced organiser", hikeFrequency: "6x/mo", phase: "Phase 2", firstTap: "Alerts", timeOnTask: 114, usability: 6, quitTime: 114, quitPage: "Success", lastAction: "Feature Activation" },
 ];
 
 const chartColors = ["var(--color-primary)", "var(--color-accent)", "var(--color-warning)", "var(--color-info)", "var(--color-positive)"];
@@ -66,10 +67,15 @@ function average(values: number[]) {
   return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0;
 }
 
+function weightedAverage(rows: StudyRow[], key: (row: StudyRow) => number) {
+  const totalUsers = rows.reduce((sum, row) => sum + row.users, 0);
+  return totalUsers ? rows.reduce((sum, row) => sum + key(row) * row.users, 0) / totalUsers : 0;
+}
+
 function countBy<T extends string>(rows: StudyRow[], key: (row: StudyRow) => T) {
   return rows.reduce<Record<T, number>>((acc, row) => {
     const value = key(row);
-    acc[value] = (acc[value] ?? 0) + 1;
+    acc[value] = (acc[value] ?? 0) + row.users;
     return acc;
   }, {} as Record<T, number>);
 }
@@ -162,9 +168,9 @@ export function AATestingTab() {
   );
 
   const analytics = useMemo(() => {
-    const avgUsability = average(filteredRows.map((row) => row.usability));
-    const avgTaskTime = average(filteredRows.map((row) => row.timeOnTask));
-    const avgQuitTime = average(filteredRows.map((row) => row.quitTime));
+    const avgUsability = weightedAverage(filteredRows, (row) => row.usability);
+    const avgTaskTime = weightedAverage(filteredRows, (row) => row.timeOnTask);
+    const avgQuitTime = weightedAverage(filteredRows, (row) => row.quitTime);
     const quitPageSeries = toSeries(countBy(filteredRows, (row) => row.quitPage));
     const lastActionSeries = toSeries(countBy(filteredRows, (row) => row.lastAction));
     const firstTapSeries = toSeries(countBy(filteredRows, (row) => row.firstTap));
@@ -175,27 +181,28 @@ export function AATestingTab() {
       const rows = filteredRows.filter((row) => row.group === name);
       return {
         name,
-        usability: Number(average(rows.map((row) => row.usability)).toFixed(1)),
-        time: Math.round(average(rows.map((row) => row.timeOnTask))),
-        quitTime: Math.round(average(rows.map((row) => row.quitTime))),
-        Routes: rows.filter((row) => row.firstTap === "Routes").length,
-        Map: rows.filter((row) => row.firstTap === "Map").length,
-        Alerts: rows.filter((row) => row.firstTap === "Alerts").length,
+        users: rows.reduce((sum, row) => sum + row.users, 0),
+        usability: Number(weightedAverage(rows, (row) => row.usability).toFixed(1)),
+        time: Math.round(weightedAverage(rows, (row) => row.timeOnTask)),
+        quitTime: Math.round(weightedAverage(rows, (row) => row.quitTime)),
+        Routes: rows.filter((row) => row.firstTap === "Routes").reduce((sum, row) => sum + row.users, 0),
+        Map: rows.filter((row) => row.firstTap === "Map").reduce((sum, row) => sum + row.users, 0),
+        Alerts: rows.filter((row) => row.firstTap === "Alerts").reduce((sum, row) => sum + row.users, 0),
       };
     });
     const personaBehavior = Array.from(new Set(studyRows.map((row) => row.persona))).map((name) => {
       const rows = filteredRows.filter((row) => row.persona === name);
       return {
         name: name.replace(" ", "\n"),
-        taskTime: Math.round(average(rows.map((row) => row.timeOnTask))),
-        usability: Number(average(rows.map((row) => row.usability)).toFixed(1)),
+        taskTime: Math.round(weightedAverage(rows, (row) => row.timeOnTask)),
+        usability: Number(weightedAverage(rows, (row) => row.usability).toFixed(1)),
       };
     });
     const ageDistribution = [
-      { name: "20–24", value: filteredRows.filter((row) => row.age >= 20 && row.age <= 24).length },
-      { name: "25–29", value: filteredRows.filter((row) => row.age >= 25 && row.age <= 29).length },
-      { name: "30–34", value: filteredRows.filter((row) => row.age >= 30 && row.age <= 34).length },
-      { name: "35–40", value: filteredRows.filter((row) => row.age >= 35 && row.age <= 40).length },
+      { name: "20-24", value: filteredRows.filter((row) => row.age >= 20 && row.age <= 24).reduce((sum, row) => sum + row.users, 0) },
+      { name: "25-29", value: filteredRows.filter((row) => row.age >= 25 && row.age <= 29).reduce((sum, row) => sum + row.users, 0) },
+      { name: "30-34", value: filteredRows.filter((row) => row.age >= 30 && row.age <= 34).reduce((sum, row) => sum + row.users, 0) },
+      { name: "35-40", value: filteredRows.filter((row) => row.age >= 35 && row.age <= 40).reduce((sum, row) => sum + row.users, 0) },
     ];
     return {
       avgUsability,
@@ -213,7 +220,7 @@ export function AATestingTab() {
     };
   }, [filteredRows]);
 
-  const winner = analytics.groupComparison[0].usability >= analytics.groupComparison[1].usability ? "A1" : "A2";
+  const totalStudyUsers = filteredRows.reduce((sum, row) => sum + row.users, 0);
   const trend = analytics.avgTaskTime < 125 ? "Fast journeys correlate with confident usability." : "Longer task times cluster around planning personas.";
 
   return (
@@ -228,7 +235,7 @@ export function AATestingTab() {
               </div>
               <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-6xl">A/A testing analytics dashboard</h1>
               <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-                Product performance, tap intent, personas, demographics, and efficiency signals from {studyRows.length} moderated hiking-app sessions.
+                Product performance, tap intent, personas, demographics, and efficiency signals from {totalStudyUsers} mobile app users split evenly across A1 and A2.
               </p>
             </div>
             <div className="grid gap-3 rounded-3xl border border-border bg-card/75 p-4 shadow-soft sm:grid-cols-3 lg:min-w-[520px]">
@@ -241,14 +248,14 @@ export function AATestingTab() {
 
         <section className="mb-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <KpiCard icon={Activity} label="Avg usability" value={analytics.avgUsability.toFixed(1)} detail="Score out of 6" />
+          <KpiCard icon={Users} label="Group split" value="490 / 490" detail="A1 and A2 users" />
           <KpiCard icon={Timer} label="Avg task time" value={formatSeconds(analytics.avgTaskTime)} detail="Journey completion" />
-          <KpiCard icon={Timer} label="Avg quit time" value={formatSeconds(analytics.avgQuitTime)} detail="Time before drop-off" />
-          <KpiCard icon={MousePointerClick} label="Top first tap" value={analytics.commonTap} detail="Dominant entry point" />
+          <KpiCard icon={MousePointerClick} label="p-value" value="0.74" detail="No significant difference" />
         </section>
 
         <section className="mb-7 grid gap-5 xl:grid-cols-[1.25fr_1fr]">
           <ChartCard>
-            <SectionTitle icon={BarChart3} eyebrow="A/A testing" title={`Version ${winner} is leading on usability`} />
+            <SectionTitle icon={BarChart3} eyebrow="A/A testing" title="A1 and A2 track within random variance" />
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={analytics.groupComparison} margin={{ left: 0, right: 12, top: 8, bottom: 0 }}>

@@ -83,35 +83,37 @@ export function BilanTab() {
   const report = useMemo(() => generateReportSummary(), []);
 
   // Generate daily chart data
-  const dailyData = Array.from({ length: 30 }, (_, i) => ({
+  const dailySessions = [72, 88, 134, 142, 70, 64, 76, 84, 91, 148, 156, 73, 69, 82, 86, 94, 152, 164, 78, 71, 85, 92, 98, 158, 172, 80, 74, 88, 96, 110];
+  const dailyActivations = [56, 67, 106, 112, 52, 47, 58, 64, 69, 118, 126, 54, 51, 62, 66, 72, 123, 133, 58, 52, 65, 70, 75, 128, 140, 60, 55, 67, 73, 84];
+  const dailyBounce = [19, 18, 17, 16, 21, 22, 20, 19, 18, 17, 16, 21, 22, 19, 18, 18, 16, 15, 20, 21, 19, 18, 18, 16, 15, 20, 21, 19, 18, 17];
+  const dailyData = dailySessions.map((sessions, i) => ({
     date: new Date(2026, 0, i + 1).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-    sessions: Math.floor(Math.random() * 8000 + 2000),
-    conversions: Math.floor(Math.random() * 400 + 100),
-    bounceRate: Math.floor(Math.random() * 15 + 20),
+    sessions,
+    conversions: dailyActivations[i],
+    bounceRate: dailyBounce[i],
   }));
 
   const weeklyData = [
-    { week: "Week 1", sessions: 28450, conversions: 1845, bounceRate: 32.1, revenue: 45230 },
-    { week: "Week 2", sessions: 31200, conversions: 1923, bounceRate: 29.8, revenue: 47120 },
-    { week: "Week 3", sessions: 29850, conversions: 1834, bounceRate: 28.5, revenue: 45890 },
-    { week: "Week 4", sessions: 33200, conversions: 2040, bounceRate: 27.3, revenue: 50280 },
+    { week: "Week 1", sessions: 697, conversions: 540, bounceRate: 19.4 },
+    { week: "Week 2", sessions: 742, conversions: 574, bounceRate: 18.9 },
+    { week: "Week 3", sessions: 766, conversions: 596, bounceRate: 18.2 },
+    { week: "Week 4", sessions: 842, conversions: 653, bounceRate: 17.6 },
   ];
 
   const monthlyData = [
-    { month: "Nov", sessions: 125000, conversions: 7450, bounceRate: 35.2 },
-    { month: "Dec", sessions: 185000, conversions: 11200, bounceRate: 31.5 },
-    { month: "Jan", sessions: 145230, conversions: 8952, bounceRate: 28.5 },
+    { month: "Nov", sessions: 2280, conversions: 1694, bounceRate: 21.4 },
+    { month: "Dec", sessions: 2610, conversions: 1989, bounceRate: 19.8 },
+    { month: "Jan", sessions: 3047, conversions: 2363, bounceRate: 18.6 },
   ];
 
   const deviceBreakdown = [
-    { name: "Mobile", value: 65, conversions: 5828 },
-    { name: "Desktop", value: 28, conversions: 2506 },
-    { name: "Tablet", value: 7, conversions: 618 },
+    { name: "iOS", value: 58, conversions: 1371 },
+    { name: "Android", value: 42, conversions: 992 },
   ];
 
   const visitorTypeBreakdown = [
-    { name: "New Visitors", value: 55, users: 67300 },
-    { name: "Returning", value: 45, users: 53200 },
+    { name: "New Users", value: 40, users: 392 },
+    { name: "Returning", value: 60, users: 588 },
   ];
 
   return (
@@ -126,7 +128,7 @@ export function BilanTab() {
             </div>
             <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-6xl">Performance Report</h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-              Comprehensive analytics overview for {report.dateRange}. Session activity, conversions, user behavior, and engagement metrics across all channels.
+              Comprehensive mobile app analytics overview for {report.dateRange}. Session activity, feature activations, user behavior, and engagement metrics across iOS and Android.
             </p>
             <div className="mt-6 flex gap-3">
               <button className="inline-flex items-center gap-2 rounded-2xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
@@ -142,8 +144,8 @@ export function BilanTab() {
         {/* Key Metrics */}
         <section className="mb-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <StatCard icon={Users} label="Total Sessions" value={report.totalSessions} color="primary" />
-          <StatCard icon={Zap} label="Total Conversions" value={report.totalConversions} color="accent" />
-          <StatCard icon={Eye} label="Conversion Rate" value={report.conversionRate.toFixed(2)} unit="%" color="positive" />
+          <StatCard icon={Zap} label="Feature Activations" value={report.totalConversions} color="accent" />
+          <StatCard icon={Eye} label="Engagement Rate" value={report.conversionRate.toFixed(2)} unit="%" color="positive" />
           <StatCard icon={Clock} label="Avg Duration" value={report.avgSessionDuration} unit="s" color="info" />
         </section>
 
@@ -158,14 +160,14 @@ export function BilanTab() {
           </ChartCard>
           <ChartCard>
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Avg Pages/Session</p>
+              <p className="text-sm font-medium text-muted-foreground">Avg Screens/Session</p>
               <p className="mt-2 text-4xl font-semibold text-foreground">{report.avgPagesPerSession}</p>
               <p className="mt-2 text-xs text-muted-foreground">↑ 0.3 from last month</p>
             </div>
           </ChartCard>
           <ChartCard>
             <div>
-              <p className="text-sm font-medium text-muted-foreground">New Visitors</p>
+              <p className="text-sm font-medium text-muted-foreground">New Users</p>
               <p className="mt-2 text-4xl font-semibold text-foreground">{report.newVisitors.toLocaleString()}</p>
               <p className="mt-2 text-xs text-muted-foreground">{report.newVisitors > report.returningVisitors ? "↑ More new traffic" : "↓ Returning strong"}</p>
             </div>
@@ -175,7 +177,7 @@ export function BilanTab() {
         {/* Daily & Weekly Trends */}
         <section className="mb-7 grid gap-5 xl:grid-cols-2">
           <ChartCard>
-            <SectionTitle icon={BarChart3} eyebrow="Daily Metrics" title="Sessions & conversions trend" />
+            <SectionTitle icon={BarChart3} eyebrow="Daily Metrics" title="Sessions & feature activations" />
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={dailyData} margin={{ left: 0, right: 12, top: 8, bottom: 0 }}>
@@ -186,7 +188,7 @@ export function BilanTab() {
                   <Tooltip content={<ChartTooltip />} />
                   <Legend />
                   <Bar yAxisId="left" dataKey="sessions" name="Sessions" fill="var(--color-primary)" radius={[8, 8, 0, 0]} />
-                  <Line yAxisId="right" dataKey="conversions" name="Conversions" stroke="var(--color-accent)" strokeWidth={3} dot={false} />
+                  <Line yAxisId="right" dataKey="conversions" name="Feature Activations" stroke="var(--color-accent)" strokeWidth={3} dot={false} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
@@ -211,25 +213,25 @@ export function BilanTab() {
           </ChartCard>
         </section>
 
-        {/* Top Pages & Drop-off */}
+        {/* Top Features & Drop-off */}
         <section className="mb-7 grid gap-5 xl:grid-cols-2">
           <ChartCard>
-            <SectionTitle icon={Eye} eyebrow="Content" title="Top performing pages" />
+            <SectionTitle icon={Eye} eyebrow="Features" title="Top feature activations" />
             <div className="space-y-3">
               {report.topPages.map((page, i) => (
                 <div key={i} className="rounded-2xl border border-border bg-card/50 p-3">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-medium text-foreground">{page.page}</p>
-                      <p className="mt-1 text-xs text-muted-foreground">{page.views.toLocaleString()} views</p>
+                      <p className="mt-1 text-xs text-muted-foreground">{page.views.toLocaleString()} opens</p>
                     </div>
                     <div className="text-right">
                       <p className="font-semibold text-positive">{page.conversionRate.toFixed(2)}%</p>
-                      <p className="text-xs text-muted-foreground">{page.conversions} conv.</p>
+                      <p className="text-xs text-muted-foreground">{page.conversions} activations</p>
                     </div>
                   </div>
                   <div className="mt-2 h-2 overflow-hidden rounded-full bg-secondary">
-                    <div className="h-full bg-gradient-to-r from-primary to-accent" style={{ width: `${(page.conversionRate / 8) * 100}%` }} />
+                    <div className="h-full bg-gradient-to-r from-primary to-accent" style={{ width: `${page.conversionRate}%` }} />
                   </div>
                 </div>
               ))}
@@ -237,7 +239,7 @@ export function BilanTab() {
           </ChartCard>
 
           <ChartCard>
-            <SectionTitle icon={TrendingDown} eyebrow="Drop-off Points" title="Where users exit" />
+            <SectionTitle icon={TrendingDown} eyebrow="Drop-off Points" title="Where users pause setup" />
             <div className="space-y-3">
               {report.dropOffPoints.map((point, i) => (
                 <div key={i} className="rounded-2xl border border-border bg-card/50 p-3">
@@ -298,7 +300,7 @@ export function BilanTab() {
           </ChartCard>
 
           <ChartCard>
-            <SectionTitle icon={Users} eyebrow="Visitor Type" title="New vs returning users" />
+            <SectionTitle icon={Users} eyebrow="User Type" title="New vs returning users" />
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -343,24 +345,24 @@ export function BilanTab() {
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Peak Activity:</span> Saturdays at 2-3 PM
+                  <span className="font-semibold text-foreground">Peak Activity:</span> Saturdays at 8-10 AM
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Traffic Source:</span> 35% from Google Organic, 25% Direct
+                  <span className="font-semibold text-foreground">Top Source:</span> 42% from app icon launch, 17% push safety alerts
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Top Device:</span> Mobile (65% of traffic)
+                  <span className="font-semibold text-foreground">Top Platform:</span> iOS (58% of users)
                 </p>
               </div>
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Trending Up:</span> Mobile conversion rates (+2.3% vs previous month)
+                  <span className="font-semibold text-foreground">Trending Up:</span> Feature activation rate (+1.8pp vs previous month)
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Areas to Improve:</span> Desktop bounce rate (35%) & mobile payment flow
+                  <span className="font-semibold text-foreground">Areas to Improve:</span> Offline map sync and AR navigation permission setup
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Recommendation:</span> Optimize checkout flow for mobile & retarget high-bouncing pages
+                  <span className="font-semibold text-foreground">Recommendation:</span> Simplify safety setup and pre-cache emergency guidance before trail start
                 </p>
               </div>
             </div>

@@ -61,7 +61,7 @@ function LiveUserCard() {
         <div>
           <SectionTitle icon={Radio} eyebrow="Real-time" title="Users online right now" />
           <p className="mt-4 flex items-baseline gap-2">
-            <span className="text-5xl font-bold text-positive">1320</span>
+            <span className="text-5xl font-bold text-positive">74</span>
             <span className="text-lg text-muted-foreground">active users</span>
           </p>
         </div>
@@ -72,7 +72,7 @@ function LiveUserCard() {
           </div>
           <div className="text-right">
             <p className="text-sm text-muted-foreground">Peak hour activity</p>
-            <p className="text-2xl font-semibold text-foreground">14:00 - 15:00</p>
+            <p className="text-2xl font-semibold text-foreground">08:00 - 09:00</p>
           </div>
         </div>
       </div>
@@ -112,21 +112,21 @@ export function UserAnalyticsTab() {
   // Generate retention data
   const retentionData = [
     { day: "Day 1", percentage: 100 },
-    { day: "Day 7", percentage: 42.5 },
-    { day: "Day 14", percentage: 28.3 },
-    { day: "Day 30", percentage: 18.7 },
-    { day: "Day 60", percentage: 12.4 },
-    { day: "Day 90", percentage: 8.9 },
+    { day: "Day 7", percentage: 54.2 },
+    { day: "Day 14", percentage: 43.6 },
+    { day: "Day 30", percentage: 34.1 },
+    { day: "Day 60", percentage: 25.7 },
+    { day: "Day 90", percentage: 19.4 },
   ];
 
   // Generate session duration data
   const sessionDurationData = [
-    { range: "0-30s", users: 8450, percentage: 7.0 },
-    { range: "30-60s", users: 12300, percentage: 10.2 },
-    { range: "1-3m", users: 34200, percentage: 28.4 },
-    { range: "3-5m", users: 28900, percentage: 23.9 },
-    { range: "5-10m", users: 22650, percentage: 18.8 },
-    { range: "10m+", users: 14000, percentage: 11.6 },
+    { range: "0-30s", users: 36, percentage: 3.7 },
+    { range: "30-60s", users: 82, percentage: 8.4 },
+    { range: "1-3m", users: 246, percentage: 25.1 },
+    { range: "3-5m", users: 318, percentage: 32.4 },
+    { range: "5-10m", users: 224, percentage: 22.9 },
+    { range: "10m+", users: 74, percentage: 7.5 },
   ];
 
   return (
@@ -141,7 +141,7 @@ export function UserAnalyticsTab() {
             </div>
             <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-6xl">User Analytics Dashboard</h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-              Understand your global user base. Real-time activity, geographic distribution, device usage, traffic sources, and detailed demographics to optimize your user experience.
+              Understand the mobile hiking app user base. Real-time activity, geographic distribution, iOS and Android usage, app entry sources, and outdoor behavior patterns.
             </p>
           </div>
         </header>
@@ -155,18 +155,18 @@ export function UserAnalyticsTab() {
         <section className="mb-7 grid gap-4 md:grid-cols-3">
           <StatCard icon={Users} label="Total Users" value={analytics.totalUsers} detail="All-time total" color="primary" />
           <StatCard icon={Activity} label="Total Sessions" value={analytics.totalSessions} detail="All time" color="accent" />
-          <StatCard icon={TrendingUp} label="Avg Session Duration" value={`${analytics.avgSessionDuration}s`} detail="Time on site" color="positive" />
+          <StatCard icon={TrendingUp} label="Avg Session Duration" value={`${analytics.avgSessionDuration}s`} detail="Time in app" color="positive" />
         </section>
 
         {/* New vs Returning & Geography */}
         <section className="mb-7 grid gap-4 md:grid-cols-2">
           <ChartCard>
             <div>
-              <p className="text-sm font-medium text-muted-foreground">New vs Returning Visitors</p>
+              <p className="text-sm font-medium text-muted-foreground">New vs Returning Users</p>
               <div className="mt-4 space-y-3">
                 <div>
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-medium text-foreground">New Visitors</span>
+                    <span className="text-sm font-medium text-foreground">New Users</span>
                     <span className="text-2xl font-bold text-accent">{analytics.newVisitorPercentage.toFixed(1)}%</span>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-secondary">
@@ -176,7 +176,7 @@ export function UserAnalyticsTab() {
                 </div>
                 <div>
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-medium text-foreground">Returning Visitors</span>
+                    <span className="text-sm font-medium text-foreground">Returning Users</span>
                     <span className="text-2xl font-bold text-primary">{(100 - analytics.newVisitorPercentage).toFixed(1)}%</span>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-secondary">
@@ -189,7 +189,7 @@ export function UserAnalyticsTab() {
           </ChartCard>
 
           <ChartCard>
-            <SectionTitle icon={MapPin} eyebrow="World Map" title="Top countries" />
+            <SectionTitle icon={MapPin} eyebrow="Region" title="Top countries" />
             <div className="space-y-2">
               {analytics.countries.slice(0, 4).map((country) => (
                 <div key={country.code} className="rounded-2xl border border-border bg-card/50 p-3">
@@ -238,17 +238,17 @@ export function UserAnalyticsTab() {
                   <Tooltip content={<ChartTooltip />} />
                   <Legend />
                   <Bar yAxisId="left" dataKey="sessions" name="Sessions" fill="var(--color-primary)" radius={[8, 8, 0, 0]} />
-                  <Line yAxisId="right" dataKey="conversions" name="Conversions" stroke="var(--color-accent)" strokeWidth={2} dot={false} />
+                  <Line yAxisId="right" dataKey="conversions" name="Feature Activations" stroke="var(--color-accent)" strokeWidth={2} dot={false} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
           </ChartCard>
         </section>
 
-        {/* Device, Browser, OS Breakdown */}
-        <section className="mb-7 grid gap-5 xl:grid-cols-3">
+        {/* Platform Breakdown */}
+        <section className="mb-7 grid gap-5 xl:grid-cols-2">
           <ChartCard>
-            <SectionTitle icon={Users} eyebrow="Device" title="User breakdown" />
+            <SectionTitle icon={Users} eyebrow="Platform" title="Users by platform" />
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -265,24 +265,7 @@ export function UserAnalyticsTab() {
           </ChartCard>
 
           <ChartCard>
-            <SectionTitle icon={BarChart3} eyebrow="Browser" title="Browser usage" />
-            <div className="space-y-3">
-              {analytics.browsers.map((browser) => (
-                <div key={browser.device}>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-medium text-foreground">{browser.device}</span>
-                    <span className="text-sm font-semibold text-primary">{browser.percentage}%</span>
-                  </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-secondary">
-                    <div className="h-full bg-primary" style={{ width: `${browser.percentage}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </ChartCard>
-
-          <ChartCard>
-            <SectionTitle icon={Activity} eyebrow="Operating System" title="OS distribution" />
+            <SectionTitle icon={Activity} eyebrow="Mobile OS" title="Version distribution" />
             <div className="space-y-3">
               {analytics.os.map((os) => (
                 <div key={os.device}>
@@ -313,14 +296,14 @@ export function UserAnalyticsTab() {
                   <Tooltip content={<ChartTooltip />} />
                   <Legend />
                   <Bar yAxisId="left" dataKey="users" name="Users" fill="var(--color-primary)" radius={[8, 8, 0, 0]} />
-                  <Line yAxisId="right" dataKey="conversionRate" name="Conv. Rate %" stroke="var(--color-accent)" strokeWidth={2} dot={{ r: 3 }} />
+                  <Line yAxisId="right" dataKey="conversionRate" name="Activation Rate %" stroke="var(--color-accent)" strokeWidth={2} dot={{ r: 3 }} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </ChartCard>
 
           <ChartCard>
-            <SectionTitle icon={Clock} eyebrow="Duration" title="Avg session by device" />
+            <SectionTitle icon={Clock} eyebrow="Duration" title="Avg session by platform" />
             <div className="space-y-4">
               {analytics.devices.map((device) => (
                 <div key={device.device}>
@@ -381,15 +364,15 @@ export function UserAnalyticsTab() {
                   <div>
                     <p className="font-medium text-foreground">{session.country}</p>
                     <p className="text-xs text-muted-foreground">
-                      {session.device} • {session.browser} • {session.pages} pages
+                      {session.device} • {session.feature} • {session.screens} screens
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
                     <span className="text-sm text-muted-foreground">{session.duration}s</span>
                     {session.conversion ? (
-                      <span className="rounded-full bg-positive/20 px-3 py-1 text-xs font-semibold text-positive">Converted</span>
+                      <span className="rounded-full bg-positive/20 px-3 py-1 text-xs font-semibold text-positive">Activated</span>
                     ) : (
-                      <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">Browsing</span>
+                      <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">Exploring</span>
                     )}
                   </div>
                 </div>

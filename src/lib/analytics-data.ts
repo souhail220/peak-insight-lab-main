@@ -64,21 +64,21 @@ export interface UserSession {
   userId: string;
   country: string;
   device: string;
-  browser: string;
+  feature: string;
   duration: number;
   timestamp: Date;
-  pages: number;
+  screens: number;
   conversion: boolean;
 }
 
 // A/B Testing data generator
 export function generateABTestMetrics(): ABTestMetrics {
-  const variantAVisits = 12450;
-  const variantAConversions = 1248;
+  const variantAVisits = 490;
+  const variantAConversions = 348;
   const variantAConversionRate = (variantAConversions / variantAVisits) * 100;
 
-  const variantBVisits = 12380;
-  const variantBConversions = 1456;
+  const variantBVisits = 490;
+  const variantBConversions = 386;
   const variantBConversionRate = (variantBConversions / variantBVisits) * 100;
 
   const uplift = ((variantBConversionRate - variantAConversionRate) / variantAConversionRate) * 100;
@@ -89,19 +89,19 @@ export function generateABTestMetrics(): ABTestMetrics {
       conversionRate: parseFloat(variantAConversionRate.toFixed(2)),
       visits: variantAVisits,
       conversions: variantAConversions,
-      avgSessionDuration: 245,
-      bounceRate: 32.5,
-      ctr: 4.2,
-      confidence: 95.2,
+      avgSessionDuration: 318,
+      bounceRate: 20.8,
+      ctr: 71.0,
+      confidence: 94.8,
     },
     variantB: {
       conversionRate: parseFloat(variantBConversionRate.toFixed(2)),
       visits: variantBVisits,
       conversions: variantBConversions,
-      avgSessionDuration: 278,
-      bounceRate: 28.1,
-      ctr: 5.8,
-      confidence: 97.1,
+      avgSessionDuration: 344,
+      bounceRate: 17.4,
+      ctr: 78.8,
+      confidence: 96.1,
     },
     uplift: parseFloat(uplift.toFixed(2)),
     winner: variantBConversionRate > variantAConversionRate ? "B" : "A",
@@ -113,31 +113,39 @@ export function generateABTestMetrics(): ABTestMetrics {
 export function generateReportSummary() {
   return {
     dateRange: "Jan 1 - Jan 31, 2026",
-    totalSessions: 145230,
-    totalConversions: 8952,
-    conversionRate: 6.16,
-    avgSessionDuration: 287,
-    bounceRate: 28.5,
-    avgPagesPerSession: 4.2,
-    newVisitors: 89230,
-    returningVisitors: 56000,
+    totalSessions: 3047,
+    totalConversions: 2363,
+    conversionRate: 77.55,
+    avgSessionDuration: 326,
+    bounceRate: 18.6,
+    avgPagesPerSession: 5.4,
+    newVisitors: 392,
+    returningVisitors: 588,
     topPages: [
-      { page: "/hiking/trails", views: 45230, conversions: 3420, conversionRate: 7.56 },
-      { page: "/hiking/booking", views: 38920, conversions: 2856, conversionRate: 7.34 },
-      { page: "/hiking/guides", views: 32150, conversions: 1685, conversionRate: 5.24 },
-      { page: "/hiking/reviews", views: 28450, conversions: 891, conversionRate: 3.13 },
+      { page: "AI Route Generator with AR Navigation", views: 742, conversions: 604, conversionRate: 81.4 },
+      { page: "AI Safety Watch", views: 694, conversions: 552, conversionRate: 79.5 },
+      { page: "Smart Gear Checklist", views: 612, conversions: 474, conversionRate: 77.5 },
+      { page: "Offline AI Emergency Assistant", views: 486, conversions: 358, conversionRate: 73.7 },
     ],
     topScreens: [
-      { screen: "Trail Grid", interactions: 52100, avgTime: 84 },
-      { screen: "Booking Form", interactions: 41200, avgTime: 156 },
-      { screen: "Payment", interactions: 28900, avgTime: 234 },
-      { screen: "Confirmation", interactions: 28500, avgTime: 45 },
+      { screen: "AI Safety Watch", interactions: 552, avgTime: 118 },
+      { screen: "Offline AI Emergency Assistant", interactions: 358, avgTime: 146 },
+      { screen: "Mesh SOS Network", interactions: 276, avgTime: 92 },
+      { screen: "AI Route Generator with AR Navigation", interactions: 604, avgTime: 164 },
+      { screen: "RadioMode Walkie-Talkie", interactions: 318, avgTime: 136 },
+      { screen: "Smart Gear Checklist", interactions: 474, avgTime: 108 },
+      { screen: "AI Hiking Companion", interactions: 438, avgTime: 152 },
+      { screen: "Enhanced Route Sharing", interactions: 286, avgTime: 86 },
+      { screen: "GhostTrail Footprint System", interactions: 304, avgTime: 124 },
+      { screen: "WildlifeID Lens", interactions: 334, avgTime: 74 },
+      { screen: "StarPath Night Navigator", interactions: 218, avgTime: 132 },
+      { screen: "ThermalRisk Scanner", interactions: 258, avgTime: 88 },
     ],
     dropOffPoints: [
-      { page: "Trail Details", dropOffRate: 12.5 },
-      { page: "Booking Form", dropOffRate: 28.3 },
-      { page: "Payment Method", dropOffRate: 18.7 },
-      { page: "Final Confirmation", dropOffRate: 5.2 },
+      { page: "Trail difficulty review", dropOffRate: 10.8 },
+      { page: "AR navigation permission", dropOffRate: 8.6 },
+      { page: "Offline map sync", dropOffRate: 7.9 },
+      { page: "Emergency contact setup", dropOffRate: 6.4 },
     ],
   };
 }
@@ -145,90 +153,84 @@ export function generateReportSummary() {
 // User analytics data
 export function generateUserAnalyticsData() {
   const countries: CountryData[] = [
-    { country: "Tunisia", code: "TN", users: 85400, percentage: 70.8, avgSessionDuration: 325 },
-    { country: "Algeria", code: "DZ", users: 18900, percentage: 15.7, avgSessionDuration: 298 },
-    { country: "Morocco", code: "MA", users: 10200, percentage: 8.5, avgSessionDuration: 287 },
-    { country: "Libya", code: "LY", users: 3200, percentage: 2.7, avgSessionDuration: 245 },
-    { country: "Egypt", code: "EG", users: 2800, percentage: 2.3, avgSessionDuration: 276 },
+    { country: "Tunisia", code: "TN", users: 694, percentage: 70.8, avgSessionDuration: 336 },
+    { country: "Algeria", code: "DZ", users: 154, percentage: 15.7, avgSessionDuration: 312 },
+    { country: "Morocco", code: "MA", users: 83, percentage: 8.5, avgSessionDuration: 304 },
+    { country: "Libya", code: "LY", users: 26, percentage: 2.7, avgSessionDuration: 282 },
+    { country: "Egypt", code: "EG", users: 23, percentage: 2.3, avgSessionDuration: 296 },
   ];
 
   const devices: DeviceData[] = [
-    { device: "Mobile", users: 78450, percentage: 65.2, avgSessionDuration: 245 },
-    { device: "Desktop", users: 35280, percentage: 29.3, avgSessionDuration: 412 },
-    { device: "Tablet", users: 6770, percentage: 5.6, avgSessionDuration: 289 },
-  ];
-
-  const browsers: DeviceData[] = [
-    { device: "Chrome", users: 68420, percentage: 56.8, avgSessionDuration: 298 },
-    { device: "Safari", users: 34890, percentage: 28.9, avgSessionDuration: 312 },
-    { device: "Firefox", users: 10450, percentage: 8.7, avgSessionDuration: 276 },
-    { device: "Edge", users: 5740, percentage: 4.8, avgSessionDuration: 285 },
+    { device: "iOS", users: 568, percentage: 58.0, avgSessionDuration: 338 },
+    { device: "Android", users: 412, percentage: 42.0, avgSessionDuration: 310 },
   ];
 
   const os: DeviceData[] = [
-    { device: "iOS", users: 45230, percentage: 37.6, avgSessionDuration: 267 },
-    { device: "Android", users: 48900, percentage: 40.6, avgSessionDuration: 234 },
-    { device: "Windows", users: 18450, percentage: 15.3, avgSessionDuration: 398 },
-    { device: "macOS", users: 7870, percentage: 6.5, avgSessionDuration: 425 },
+    { device: "iOS 18", users: 392, percentage: 40.0, avgSessionDuration: 342 },
+    { device: "iOS 17", users: 176, percentage: 18.0, avgSessionDuration: 329 },
+    { device: "Android 15", users: 255, percentage: 26.0, avgSessionDuration: 316 },
+    { device: "Android 14", users: 157, percentage: 16.0, avgSessionDuration: 301 },
   ];
 
   const trafficSources: TrafficSource[] = [
-    { source: "Direct", users: 34200, sessions: 52300, conversionRate: 8.2 },
-    { source: "Google Tunisia", users: 45600, sessions: 68900, conversionRate: 6.8 },
-    { source: "Facebook", users: 18900, sessions: 28450, conversionRate: 5.1 },
-    { source: "Instagram", users: 12300, sessions: 18650, conversionRate: 4.2 },
-    { source: "Email", users: 8450, sessions: 12300, conversionRate: 9.5 },
-    { source: "Referral", users: 5200, sessions: 7850, conversionRate: 3.8 },
+    { source: "App icon launch", users: 338, sessions: 1291, conversionRate: 82.1 },
+    { source: "Push safety alert", users: 196, sessions: 514, conversionRate: 79.4 },
+    { source: "Shared route invite", users: 142, sessions: 386, conversionRate: 75.9 },
+    { source: "App Store search", users: 132, sessions: 318, conversionRate: 71.8 },
+    { source: "Trail community post", users: 98, sessions: 296, conversionRate: 73.6 },
+    { source: "Emergency contact invite", users: 74, sessions: 242, conversionRate: 80.2 },
   ];
 
-  const hourlyData: HourlyActivity[] = Array.from({ length: 24 }, (_, i) => ({
+  const hourlyUsers = [8, 5, 3, 3, 7, 24, 58, 92, 118, 103, 84, 71, 66, 62, 58, 64, 72, 86, 78, 52, 34, 22, 15, 10];
+  const hourlyData: HourlyActivity[] = hourlyUsers.map((users, i) => ({
     hour: `${i.toString().padStart(2, "0")}:00`,
-    users: Math.floor(Math.random() * 2000 + 1500),
-    sessions: Math.floor(Math.random() * 3000 + 2500),
+    users,
+    sessions: Math.round(users * 1.35),
   }));
 
-  const dailyData: DailyActivity[] = Array.from({ length: 30 }, (_, i) => ({
+  const sessionsByDay = [72, 88, 134, 142, 70, 64, 76, 84, 91, 148, 156, 73, 69, 82, 86, 94, 152, 164, 78, 71, 85, 92, 98, 158, 172, 80, 74, 88, 96, 110];
+  const activationsByDay = [56, 67, 106, 112, 52, 47, 58, 64, 69, 118, 126, 54, 51, 62, 66, 72, 123, 133, 58, 52, 65, 70, 75, 128, 140, 60, 55, 67, 73, 84];
+  const dailyData: DailyActivity[] = sessionsByDay.map((sessions, i) => ({
     date: new Date(2026, 0, i + 1).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-    sessions: Math.floor(Math.random() * 8000 + 4000),
-    users: Math.floor(Math.random() * 5000 + 3000),
-    conversions: Math.floor(Math.random() * 600 + 200),
+    sessions,
+    users: Math.round(sessions * 0.64),
+    conversions: activationsByDay[i],
   }));
 
   return {
-    totalUsers: 2000,
-    activeUsers: 14250,
-    totalSessions: 8420,
-    peakHour: "14:00 - 15:00",
+    totalUsers: 980,
+    activeUsers: 74,
+    totalSessions: 3047,
+    peakHour: "08:00 - 09:00",
     peakDay: "Saturday",
-    newVisitors: 67300,
-    returningVisitors: 53200,
-    newVisitorPercentage: 55.8,
+    newVisitors: 392,
+    returningVisitors: 588,
+    newVisitorPercentage: 40.0,
     countries,
     devices,
-    browsers,
     os,
     trafficSources,
     hourlyData,
     dailyData,
-    avgSessionDuration: 287,
-    avgPagesPerSession: 4.2,
+    avgSessionDuration: 326,
+    avgPagesPerSession: 5.4,
   };
 }
 
 // Generate recent sessions
 export function generateRecentSessions(): UserSession[] {
-  const devices = ["iPhone 15", "Samsung Galaxy S24", "iPad Pro", "MacBook Pro", "Dell XPS"];
-  const browsers = ["Chrome", "Safari", "Firefox", "Edge"];
+  const devices = ["iPhone 15 Pro", "iPhone 14", "Samsung Galaxy S24", "Google Pixel 9", "Xiaomi 14"];
+  const features = ["AI Safety Watch", "AI Route Generator", "Smart Gear Checklist", "WildlifeID Lens", "Mesh SOS Network"];
 
   return Array.from({ length: 15 }, (_, i) => ({
     sessionId: `session_${Date.now()}_${i}`,
-    userId: `user_${Math.floor(Math.random() * 10000)}`,
+    userId: `user_${String(Math.floor(Math.random() * 980) + 1).padStart(3, "0")}`,
     country: "from TN",
     device: devices[Math.floor(Math.random() * devices.length)],
-    browser: browsers[Math.floor(Math.random() * browsers.length)],
-    duration: Math.floor(Math.random() * 1200 + 60),
+    feature: features[Math.floor(Math.random() * features.length)],
+    duration: Math.floor(Math.random() * 480 + 90),
     timestamp: new Date(Date.now() - Math.random() * 3600000),
-    pages: Math.floor(Math.random() * 8 + 1),
-    conversion: Math.random() > 0.6,
+    screens: Math.floor(Math.random() * 5 + 3),
+    conversion: Math.random() > 0.22,
   }));
 }

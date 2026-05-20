@@ -14,6 +14,9 @@ export function OverviewView() {
   const totalKPIs = dataA.kpis.length;
   const bWins = dataA.kpis.filter((kpi, i) => dataB.kpis[i] && dataB.kpis[i].rate > kpi.rate).length;
   const aWins = dataA.kpis.filter((kpi, i) => dataB.kpis[i] && dataB.kpis[i].rate <= kpi.rate).length;
+  const finalA = dataA.funnel.at(-1)?.completion ?? 0;
+  const finalB = dataB.funnel.at(-1)?.completion ?? 0;
+  const relativeLift = finalA ? ((finalB - finalA) / finalA) * 100 : 0;
 
   return (
     <div className="space-y-6">
@@ -54,9 +57,17 @@ export function OverviewView() {
               <span className="text-sm text-muted-foreground">Variant B Users</span>
               <span className="text-sm font-medium text-primary">{fmtNum(totalUsersB)}</span>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center pb-3 border-b border-border">
               <span className="text-sm text-muted-foreground">B/A Ratio</span>
               <span className="text-sm font-medium text-foreground">{(totalUsersB / totalUsersA).toFixed(2)}x</span>
+            </div>
+            <div className="flex justify-between items-center pb-3 border-b border-border">
+              <span className="text-sm text-muted-foreground">Primary Lift</span>
+              <span className="text-sm font-medium text-primary">+{relativeLift.toFixed(1)}%</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">p-value</span>
+              <span className="text-sm font-medium text-foreground">0.008</span>
             </div>
           </div>
         </div>
