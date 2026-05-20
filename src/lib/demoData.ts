@@ -1,4 +1,5 @@
 import type { InterfaceData } from "@/lib/parseExcel";
+import { generateHeatmapsForInterface } from "@/lib/heatmaps";
 
 // 12 TrailMate Hiking App Features
 const FEATURES = [
@@ -88,42 +89,8 @@ export function generateDemoInterfaceData(variant: "A" | "B"): InterfaceData {
       "Emergency Used"
     ],
     rawData,
-    heatmaps: generateHeatmapData(variant, isVariantB),
+    heatmaps: generateHeatmapsForInterface(variant, isVariantB, 150),
   };
-}
-
-// Generate heatmap data for screen interactions
-function generateHeatmapData(variant: string, isVariantB: boolean) {
-  const screens = [
-    { name: "Home Screen", width: 1080, height: 2340 },
-    { name: "Discovery Feed", width: 1080, height: 2340 },
-    { name: "Route Details", width: 1080, height: 2340 },
-    { name: "Emergency Panel", width: 1080, height: 2340 },
-    { name: "Gear Checklist", width: 1080, height: 2340 },
-  ];
-
-  return screens.map(screen => {
-    const clicks: Array<{x: number, y: number, count: number}> = [];
-    const hotspotCount = isVariantB ? 8 : 5;
-    
-    for (let i = 0; i < hotspotCount; i++) {
-      clicks.push({
-        x: Math.floor(Math.random() * screen.width),
-        y: Math.floor(Math.random() * screen.height),
-        count: Math.floor(Math.random() * 200 + (isVariantB ? 50 : 20))
-      });
-    }
-
-    return {
-      screenName: screen.name,
-      screenWidth: screen.width,
-      screenHeight: screen.height,
-      clicks,
-      avgTimeSpent: Math.floor(Math.random() * 120 + (isVariantB ? 40 : 20)),
-      userCount: Math.floor(Math.random() * 150 + (isVariantB ? 100 : 60)),
-      variant
-    };
-  });
 }
 
 // Generate demo A/B test data for both variants

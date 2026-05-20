@@ -1,4 +1,5 @@
 import * as XLSX from "xlsx";
+import { generateHeatmapsForInterface, inferVariantB } from "@/lib/heatmaps";
 
 export type KpiRow = {
   kpi: string;
@@ -129,16 +130,20 @@ export async function parseInterfaceFile(file: File): Promise<InterfaceData> {
     });
   }
 
+  const userCount = meta.userCount || rawData.length;
+  const isVariantB = inferVariantB(file.name, title);
+
   return {
     fileName: file.name,
     title,
     testName: meta.testName,
     testPeriod: meta.testPeriod,
-    userCount: meta.userCount || rawData.length,
+    userCount,
     kpis,
     funnel,
     rawColumns: headers.filter((h) => !/^col\d+$/.test(h)),
     rawData,
+    heatmaps: generateHeatmapsForInterface(isVariantB ? "B" : "A", isVariantB, userCount),
   };
 }
 
