@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useABTestStore } from "@/store/abTestStore";
 import { generateDemoABTestData } from "@/lib/demoData";
-import { Trophy } from "lucide-react";
+import { Lightbulb, Trophy } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { OverviewView } from "@/components/ab-testing/OverviewView";
 import { KPIView } from "@/components/ab-testing/KPIView";
@@ -104,6 +104,29 @@ export function ABTestingTab({
             </div>
           </Tabs>
         </div>
+
+        <section className="mt-7">
+          <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <Lightbulb className="size-5" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Research hypothesis</p>
+                <h2 className="text-xl font-semibold text-foreground">
+                  Visual hierarchy prioritizes imagery over action
+                </h2>
+              </div>
+            </div>
+            <div className="space-y-4 text-sm leading-7 text-muted-foreground">
+              <p>
+                Users don't act on CTAs because the visual hierarchy prioritizes imagery over action. Bringing CTAs higher,
+                making them contrast more, and adding micro-copy explaining features will increase conversion.
+              </p>
+              <p>We also have wasted engagement on the map.</p>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );

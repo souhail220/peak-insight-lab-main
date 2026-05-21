@@ -2,7 +2,7 @@ import {
   Activity,
   BarChart3,
   Compass,
-  Filter,
+  Lightbulb,
   MapPin,
   MousePointerClick,
   Sparkles,
@@ -371,6 +371,23 @@ export function AATestingTab() {
                   <Scatter name="Participants" data={filteredRows} fill="var(--color-primary)" />
                 </ScatterChart>
               </ResponsiveContainer>
+            </div>
+          </ChartCard>
+        </section>
+
+        <section className="mt-7">
+          <ChartCard>
+            <SectionTitle icon={Lightbulb} eyebrow="Research hypothesis" title="The app's information architecture rewards patience" />
+            <div className="space-y-4 text-sm leading-7 text-muted-foreground">
+              <p>
+                Users who engage deliberately (longer task time, planning-oriented persona) rate the app significantly
+                higher — suggesting the app's information architecture rewards patience but creates friction for impulsive
+                or first-time users who expect faster task completion.
+              </p>
+              <p>
+                Reducing the number of taps to reach a saved route from the entry screen will improve usability scores for
+                impulsive adventurer personas without degrading scores for cautious planners.
+              </p>
             </div>
           </ChartCard>
         </section>
