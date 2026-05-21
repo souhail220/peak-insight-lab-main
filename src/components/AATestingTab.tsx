@@ -46,17 +46,19 @@ type StudyRow = {
   lastAction: "Back click" | "Looping" | "Error" | "Feature Activation" | "UI Stalling";
 };
 
+const USERS_PER_PARTICIPANT = 2;
+
 const studyRows: StudyRow[] = [
-  { id: "P01", group: "A1", users: 98, name: "Yasmine Trabelsi", age: 28, city: "Tunis", persona: "Cautious planner", hikeFrequency: "4x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 142, usability: 5, quitTime: 142, quitPage: "Success", lastAction: "Feature Activation" },
-  { id: "P02", group: "A1", users: 98, name: "Karim Ayari", age: 35, city: "Sfax", persona: "Experienced organiser", hikeFrequency: "6x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 121, usability: 6, quitTime: 121, quitPage: "Success", lastAction: "Feature Activation" },
-  { id: "P03", group: "A1", users: 98, name: "Rayen Meherzi", age: 23, city: "Gobaa", persona: "Impulsive adventurer", hikeFrequency: "3x/mo", phase: "Phase 2", firstTap: "Map", timeOnTask: 96, usability: 4, quitTime: 48, quitPage: "Route Detail", lastAction: "Back click" },
-  { id: "P04", group: "A1", users: 98, name: "Lina B.", age: 31, city: "Tunis", persona: "Cautious planner", hikeFrequency: "2x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 158, usability: 5, quitTime: 158, quitPage: "Success", lastAction: "Feature Activation" },
-  { id: "P05", group: "A1", users: 98, name: "Nabil H.", age: 40, city: "Bizerte", persona: "Experienced organiser", hikeFrequency: "5x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 112, usability: 6, quitTime: 112, quitPage: "Success", lastAction: "Feature Activation" },
-  { id: "P06", group: "A2", users: 98, name: "Sarra M.", age: 26, city: "Nabeul", persona: "Cautious planner", hikeFrequency: "2x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 146, usability: 5, quitTime: 75, quitPage: "Filter", lastAction: "UI Stalling" },
-  { id: "P07", group: "A2", users: 98, name: "Amir K.", age: 33, city: "Sfax", persona: "Experienced organiser", hikeFrequency: "5x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 123, usability: 6, quitTime: 123, quitPage: "Success", lastAction: "Feature Activation" },
-  { id: "P08", group: "A2", users: 98, name: "Tarek Z.", age: 22, city: "Sousse", persona: "Impulsive adventurer", hikeFrequency: "4x/mo", phase: "Phase 3", firstTap: "Routes", timeOnTask: 94, usability: 4, quitTime: 44, quitPage: "Search", lastAction: "Error" },
-  { id: "P09", group: "A2", users: 98, name: "Mariem F.", age: 29, city: "Tunis", persona: "Cautious planner", hikeFrequency: "3x/mo", phase: "Phase 1", firstTap: "Map", timeOnTask: 162, usability: 5, quitTime: 162, quitPage: "Success", lastAction: "Feature Activation" },
-  { id: "P10", group: "A2", users: 98, name: "Bilel R.", age: 38, city: "Monastir", persona: "Experienced organiser", hikeFrequency: "6x/mo", phase: "Phase 2", firstTap: "Alerts", timeOnTask: 114, usability: 6, quitTime: 114, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P01", group: "A1", users: USERS_PER_PARTICIPANT, name: "Yasmine Trabelsi", age: 28, city: "Tunis", persona: "Cautious planner", hikeFrequency: "4x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 142, usability: 5, quitTime: 142, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P02", group: "A1", users: USERS_PER_PARTICIPANT, name: "Karim Ayari", age: 35, city: "Sfax", persona: "Experienced organiser", hikeFrequency: "6x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 121, usability: 6, quitTime: 121, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P03", group: "A1", users: USERS_PER_PARTICIPANT, name: "Rayen Meherzi", age: 23, city: "Gobaa", persona: "Impulsive adventurer", hikeFrequency: "3x/mo", phase: "Phase 2", firstTap: "Map", timeOnTask: 96, usability: 4, quitTime: 48, quitPage: "Route Detail", lastAction: "Back click" },
+  { id: "P04", group: "A1", users: USERS_PER_PARTICIPANT, name: "Lina B.", age: 31, city: "Tunis", persona: "Cautious planner", hikeFrequency: "2x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 158, usability: 5, quitTime: 158, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P05", group: "A1", users: USERS_PER_PARTICIPANT, name: "Nabil H.", age: 40, city: "Bizerte", persona: "Experienced organiser", hikeFrequency: "5x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 112, usability: 6, quitTime: 112, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P06", group: "A2", users: USERS_PER_PARTICIPANT, name: "Sarra M.", age: 26, city: "Nabeul", persona: "Cautious planner", hikeFrequency: "2x/mo", phase: "Phase 1", firstTap: "Routes", timeOnTask: 146, usability: 5, quitTime: 75, quitPage: "Filter", lastAction: "UI Stalling" },
+  { id: "P07", group: "A2", users: USERS_PER_PARTICIPANT, name: "Amir K.", age: 33, city: "Sfax", persona: "Experienced organiser", hikeFrequency: "5x/mo", phase: "Phase 2", firstTap: "Routes", timeOnTask: 123, usability: 6, quitTime: 123, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P08", group: "A2", users: USERS_PER_PARTICIPANT, name: "Tarek Z.", age: 22, city: "Sousse", persona: "Impulsive adventurer", hikeFrequency: "4x/mo", phase: "Phase 3", firstTap: "Routes", timeOnTask: 94, usability: 4, quitTime: 44, quitPage: "Search", lastAction: "Error" },
+  { id: "P09", group: "A2", users: USERS_PER_PARTICIPANT, name: "Mariem F.", age: 29, city: "Tunis", persona: "Cautious planner", hikeFrequency: "3x/mo", phase: "Phase 1", firstTap: "Map", timeOnTask: 162, usability: 5, quitTime: 162, quitPage: "Success", lastAction: "Feature Activation" },
+  { id: "P10", group: "A2", users: USERS_PER_PARTICIPANT, name: "Bilel R.", age: 38, city: "Monastir", persona: "Experienced organiser", hikeFrequency: "6x/mo", phase: "Phase 2", firstTap: "Alerts", timeOnTask: 114, usability: 6, quitTime: 114, quitPage: "Success", lastAction: "Feature Activation" },
 ];
 
 const chartColors = ["var(--color-primary)", "var(--color-accent)", "var(--color-warning)", "var(--color-info)", "var(--color-positive)"];
@@ -248,7 +250,7 @@ export function AATestingTab() {
 
         <section className="mb-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <KpiCard icon={Activity} label="Avg usability" value={analytics.avgUsability.toFixed(1)} detail="Score out of 6" />
-          <KpiCard icon={Users} label="Group split" value="490 / 490" detail="A1 and A2 users" />
+          <KpiCard icon={Users} label="Group split" value="10 / 10" detail="A1 and A2 users (20 total)" />
           <KpiCard icon={Timer} label="Avg task time" value={formatSeconds(analytics.avgTaskTime)} detail="Journey completion" />
           <KpiCard icon={MousePointerClick} label="p-value" value="0.74" detail="No significant difference" />
         </section>

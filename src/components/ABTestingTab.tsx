@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useABTestStore } from "@/store/abTestStore";
-import { generateDemoABTestData } from "@/lib/demoData";
+import { DEMO_USERS_PER_VARIANT, generateDemoABTestData } from "@/lib/demoData";
 import { Lightbulb, Trophy } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { OverviewView } from "@/components/ab-testing/OverviewView";
@@ -20,7 +20,7 @@ export function ABTestingTab({
   const { dataA, dataB, setData } = useABTestStore();
 
   useEffect(() => {
-    if (!dataA || !dataB || dataA.userCount !== 490 || dataB.userCount !== 490) {
+    if (!dataA || !dataB || dataA.userCount !== DEMO_USERS_PER_VARIANT || dataB.userCount !== DEMO_USERS_PER_VARIANT) {
       const { dataA: demoA, dataB: demoB } = generateDemoABTestData();
       setData(demoA, demoB);
     }
